@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -18,12 +17,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.campusdigitalfp.filmoteca.R
 
 @Composable
 fun AboutScreen( modifier: Modifier = Modifier) {
     val context = LocalContext.current
+    val mensajeToast = stringResource(R.string.funcionalidad_sin_implementar)
+
     Column (
         modifier= modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -31,7 +33,7 @@ fun AboutScreen( modifier: Modifier = Modifier) {
 
     ){
         Text(
-            text = "Creado por Susana Paracuellos Ralfas",
+            text = stringResource(R.string.creada_por),
             //modifier = modifier,
             style = MaterialTheme.typography.titleMedium
         )
@@ -44,27 +46,27 @@ fun AboutScreen( modifier: Modifier = Modifier) {
         Row {
             Button(
                 onClick = {
-                    showToast(context= context, "Funcionalidad sin implementar")
+                    showToast(context= context, mensajeToast)
                 }
             )
             {
-                Text("Ir al sitio web")
+                Text(stringResource(R.string.ir_sitio_web))
             }
             Button(
                 onClick = {
-                    showToast(context = context, "Funcionalidad sin implementar")
+                    showToast(context = context, mensajeToast)
                 }
             ) {
-                Text("Obtener soporte")
+                Text(stringResource(R.string.obtener_soporte))
             }
         }
 
         Button(
             onClick = {
-                showToast(context = context, "Funcionalidad sin implementar")
+                showToast(context = context, mensajeToast)
             }
         ) {
-            Text("Volver")
+            Text(stringResource(R.string.volver))
         }
 
     }
