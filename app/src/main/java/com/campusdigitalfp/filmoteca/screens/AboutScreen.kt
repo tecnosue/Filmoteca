@@ -88,7 +88,7 @@ fun showToast(context: Context, message: String) {
 
 fun abrirPaginaWeb(url: String, context: Context) {
     val intent = Intent(Intent.ACTION_VIEW).apply {
-        data = çUri.parse(url) // Establece la URL que quieres abrir
+        data = Uri.parse(url) // Establece la URL que quieres abrir
     }
     context.startActivity(intent) // Inicia la actividad
 }
