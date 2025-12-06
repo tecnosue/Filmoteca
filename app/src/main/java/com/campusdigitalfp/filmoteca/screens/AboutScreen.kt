@@ -1,6 +1,8 @@
 package com.campusdigitalfp.filmoteca.screens
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.ui.platform.LocalContext
 import android.widget.Toast
 import androidx.compose.foundation.Image
@@ -46,7 +48,9 @@ fun AboutScreen( modifier: Modifier = Modifier) {
         Row {
             Button(
                 onClick = {
-                    showToast(context= context, mensajeToast)
+                    //showToast(context= context, mensajeToast)
+                    abrirPaginaWeb("https://campusdigitalfp.com/", context)
+
                 }
             )
             {
@@ -54,7 +58,11 @@ fun AboutScreen( modifier: Modifier = Modifier) {
             }
             Button(
                 onClick = {
-                    showToast(context = context, mensajeToast)
+                    //showToast(context = context, mensajeToast)
+                    mandarEmail(context , "sparacuellosrc@fpvirtualaragon.es", context.getString(R.string.incidencia_con_filmoteca))
+
+
+
                 }
             ) {
                 Text(stringResource(R.string.obtener_soporte))
@@ -76,4 +84,20 @@ fun AboutScreen( modifier: Modifier = Modifier) {
 
 fun showToast(context: Context, message: String) {
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+}
+
+fun abrirPaginaWeb(url: String, context: Context) {
+    val intent = Intent(Intent.ACTION_VIEW).apply {
+        data = çUri.parse(url) // Establece la URL que quieres abrir
+    }
+    context.startActivity(intent) // Inicia la actividad
+}
+
+fun mandarEmail(context: Context, email: String, asunto: String) {
+    val intent = Intent(Intent.ACTION_SENDTO).apply {
+        data = Uri.parse("mailto:$email?subject=${Uri.encode(asunto)}")
+        //putExtra(Intent.EXTRA_SUBJECT, asunto)
+    }
+
+    context.startActivity(intent)
 }
