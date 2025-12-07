@@ -1,7 +1,6 @@
 package com.campusdigitalfp.filmoteca.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -17,7 +16,10 @@ fun Navigation(){
     NavHost(navController = navController, startDestination = "filmList") {
         composable ("filmList"){ FilmListScreen(navController) }
         composable ("about"){ AboutScreen(navController) }
-        composable ("filmData"){ FilmDataScreen(navController) }
+        composable("filmData/{filmName}") { backStackEntry ->
+            val filmName = backStackEntry.arguments?.getString("filmName") ?: ""
+            FilmDataScreen(navController, filmName)
+        }
         composable ("filmEdit"){ FilmEditScreen(navController) }
 
 

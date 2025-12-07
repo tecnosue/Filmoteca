@@ -22,7 +22,8 @@ import androidx.navigation.NavHostController
 import com.campusdigitalfp.filmoteca.R
 
 @Composable
-fun FilmListScreen( navController: NavHostController, modifier: Modifier = Modifier) {
+fun FilmListScreen( navController: NavHostController,     modifier: Modifier = Modifier
+) {
     val context = LocalContext.current
     val mensajeToast = stringResource(R.string.funcionalidad_sin_implementar)
     Column(
@@ -33,7 +34,7 @@ fun FilmListScreen( navController: NavHostController, modifier: Modifier = Modif
     ) {
         Button(
             onClick = {
-                navController.navigate("filmData")
+                navController.navigate("filmData/Película A")
             }
         ) {
             Text(stringResource(R.string.ver_pelicula_A))
@@ -41,7 +42,7 @@ fun FilmListScreen( navController: NavHostController, modifier: Modifier = Modif
 
         Button(
             onClick = {
-                navController.navigate("filmData")
+                navController.navigate("filmData/Película B")
             }
         ) {
             Text(stringResource(R.string.ver_pelicula_B))
