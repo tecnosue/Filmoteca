@@ -20,7 +20,9 @@ fun Navigation(){
             val filmName = backStackEntry.arguments?.getString("filmName") ?: ""
             FilmDataScreen(navController, filmName)
         }
-        composable ("filmEdit"){ FilmEditScreen(navController) }
+        composable ("filmEdit/{filmName}"){ backStackEntry ->
+            val filmName = backStackEntry.arguments?.getString("filmName") ?: ""
+            FilmEditScreen(navController, filmName ) }
 
 
     }

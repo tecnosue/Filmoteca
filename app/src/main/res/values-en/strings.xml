@@ -18,4 +18,6 @@
     <string name="editando_pelicula">Editing movie</string>
     <string name="guardar">Save</string>
     <string name="cancelar">Cancel</string>
+    <string name="edicion_cancelada">Canceled Edition</string>
+    <string name="edicion_ok">Saved Successfully</string>
 </resources>

@@ -11,11 +11,13 @@
     <string name="ver_pelicula_A">Ver película A</string>
     <string name="ver_pelicula_B">Ver película B</string>
     <string name="acerca_de">Acerca de</string>
-    <string name="datos_pelicula">Datos de la película</string>
+    <string name="datos_pelicula">Datos de la película:</string>
     <string name="ver_pelicula_relacionada">Ver película Relacionada</string>
     <string name="editar_pelicula">Editar película</string>
     <string name="volver_principal">Volver a la principal</string>
-    <string name="editando_pelicula">Editando película</string>
+    <string name="editando_pelicula">Editando película:</string>
     <string name="guardar">Guardar</string>
     <string name="cancelar">Cancelar</string>
+    <string name="edicion_cancelada">Edición Cancelada</string>
+    <string name="edicion_ok">Guardado Correctamente</string>
 </resources>

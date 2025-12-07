@@ -23,7 +23,7 @@ import androidx.navigation.NavHostController
 import com.campusdigitalfp.filmoteca.R
 
 @Composable
-fun FilmEditScreen(navController: NavHostController, modifier: Modifier = Modifier) {
+fun FilmEditScreen(navController: NavHostController, filmName: String,   modifier: Modifier = Modifier) {
     val context = LocalContext.current
     val mensajeToast = stringResource(R.string.funcionalidad_sin_implementar)
     Column(
@@ -36,10 +36,14 @@ fun FilmEditScreen(navController: NavHostController, modifier: Modifier = Modifi
             stringResource(R.string.editando_pelicula) ,
             style = MaterialTheme.typography.titleMedium
         )
+        Text(
+            text = filmName,
+            style = MaterialTheme.typography.titleLarge
+        )
         Button(
             onClick = {
-                showToast(context = context, mensajeToast)
-                //mandarEmail(context , "sparacuellosrc@fpvirtualaragon.es", context.getString(R.string.incidencia_con_filmoteca))
+                navController.previousBackStackEntry?.savedStateHandle?.set("result", "RESULT_OK")
+                navController.popBackStack()
             }
         ) {
             Text(stringResource(R.string.guardar))
@@ -47,7 +51,8 @@ fun FilmEditScreen(navController: NavHostController, modifier: Modifier = Modifi
 
         Button(
             onClick = {
-                showToast(context = context, mensajeToast)
+                navController.previousBackStackEntry?.savedStateHandle?.set("result", "RESULT_CANCELED")
+                navController.popBackStack()
             }
         ) {
             Text(stringResource(R.string.cancelar))
