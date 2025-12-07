@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,61 +25,75 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.campusdigitalfp.filmoteca.R
+import com.campusdigitalfp.filmoteca.common.BarraSuperiorComun
 
 @Composable
 fun AboutScreen(navController: NavHostController, modifier: Modifier = Modifier) {
-    val context = LocalContext.current
-    val mensajeToast = stringResource(R.string.funcionalidad_sin_implementar)
+    Scaffold(
+        topBar = {
+            BarraSuperiorComun(
+                navController = navController,
+                title = "Filmoteca",
 
-    Column (
-        modifier= modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-
-    ){
-        Text(
-            text = stringResource(R.string.creada_por),
-            //modifier = modifier,
-            style = MaterialTheme.typography.titleMedium
-        )
-        Spacer(modifier = Modifier.height(20.dp))
-
-        Image (
-            painter = painterResource(id = R.drawable.perfil),
-            contentDescription = "Icono de perfil"
-        )
-        Row {
-            Button(
-                onClick = {
-                    //showToast(context= context, mensajeToast)
-                    abrirPaginaWeb("https://campusdigitalfp.com/", context)
-
-                }
             )
-            {
-                Text(stringResource(R.string.ir_sitio_web))
+        }
+    ) { innerPadding ->
+        val context = LocalContext.current
+        val mensajeToast = stringResource(R.string.funcionalidad_sin_implementar)
+
+        Column(
+            modifier = modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+
+        ) {
+            Text(
+                text = stringResource(R.string.creada_por),
+                //modifier = modifier,
+                style = MaterialTheme.typography.titleMedium
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Image(
+                painter = painterResource(id = R.drawable.perfil),
+                contentDescription = "Icono de perfil"
+            )
+            Row {
+                Button(
+                    onClick = {
+                        //showToast(context= context, mensajeToast)
+                        abrirPaginaWeb("https://campusdigitalfp.com/", context)
+
+                    }
+                )
+                {
+                    Text(stringResource(R.string.ir_sitio_web))
+                }
+                Button(
+                    onClick = {
+                        //showToast(context = context, mensajeToast)
+                        mandarEmail(
+                            context,
+                            "sparacuellosrc@fpvirtualaragon.es",
+                            context.getString(R.string.incidencia_con_filmoteca)
+                        )
+
+
+                    }
+                ) {
+                    Text(stringResource(R.string.obtener_soporte))
+                }
             }
+
             Button(
                 onClick = {
-                    //showToast(context = context, mensajeToast)
-                    mandarEmail(context , "sparacuellosrc@fpvirtualaragon.es", context.getString(R.string.incidencia_con_filmoteca))
-
-
-
+                    navController.popBackStack()
                 }
             ) {
-                Text(stringResource(R.string.obtener_soporte))
+                Text(stringResource(R.string.volver))
             }
-        }
 
-        Button(
-            onClick = {
-                navController.popBackStack()
-            }
-        ) {
-            Text(stringResource(R.string.volver))
         }
-
     }
 
 }

@@ -7,8 +7,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -20,39 +22,58 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.campusdigitalfp.filmoteca.R
+import com.campusdigitalfp.filmoteca.common.BarraSuperiorComun
 
 @Composable
 fun FilmListScreen( navController: NavHostController,     modifier: Modifier = Modifier
 ) {
-    val context = LocalContext.current
-    val mensajeToast = stringResource(R.string.funcionalidad_sin_implementar)
-    Column(
-        modifier = modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-
-    ) {
-        Button(
-            onClick = {
-                navController.navigate("filmData/Película A")
-            }
-        ) {
-            Text(stringResource(R.string.ver_pelicula_A))
+    Scaffold(
+        topBar = {
+            BarraSuperiorComun(
+                navController = navController,
+                title = "Filmoteca",
+                mostrarAtras = false
+            )
         }
+    ) { innerPadding ->
+        Column(
+            modifier = modifier
+                .fillMaxSize()
+                .padding(innerPadding),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            val context = LocalContext.current
+            val mensajeToast = stringResource(R.string.funcionalidad_sin_implementar)
+            Column(
+                modifier = modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
 
-        Button(
-            onClick = {
-                navController.navigate("filmData/Película B")
+            ) {
+                Button(
+                    onClick = {
+                        navController.navigate("filmData/Película A")
+                    }
+                ) {
+                    Text(stringResource(R.string.ver_pelicula_A))
+                }
+
+                Button(
+                    onClick = {
+                        navController.navigate("filmData/Película B")
+                    }
+                ) {
+                    Text(stringResource(R.string.ver_pelicula_B))
+                }
+                Button(
+                    onClick = {
+                        navController.navigate("about")
+                    }
+                ) {
+                    Text(stringResource(R.string.acerca_de))
+                }
             }
-        ) {
-            Text(stringResource(R.string.ver_pelicula_B))
-        }
-        Button(
-            onClick = {
-                navController.navigate("about")
-            }
-        ) {
-            Text(stringResource(R.string.acerca_de))
         }
     }
 }
