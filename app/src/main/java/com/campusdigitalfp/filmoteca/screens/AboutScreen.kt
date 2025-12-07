@@ -21,10 +21,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.campusdigitalfp.filmoteca.R
 
 @Composable
-fun AboutScreen( modifier: Modifier = Modifier) {
+fun AboutScreen(navController: NavHostController, modifier: Modifier = Modifier) {
     val context = LocalContext.current
     val mensajeToast = stringResource(R.string.funcionalidad_sin_implementar)
 
@@ -71,7 +73,7 @@ fun AboutScreen( modifier: Modifier = Modifier) {
 
         Button(
             onClick = {
-                showToast(context = context, mensajeToast)
+                navController.popBackStack()
             }
         ) {
             Text(stringResource(R.string.volver))

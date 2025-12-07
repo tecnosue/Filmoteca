@@ -8,4 +8,14 @@
     <string name="funcionalidad_sin_implementar">Feature not implemented</string>
     <string name="icono_perfil">Profile icon</string>
     <string name="incidencia_con_filmoteca">Filmoteca Issue</string>
+    <string name="ver_pelicula_A">Watch movie A</string>
+    <string name="ver_pelicula_B">Watch movie B</string>
+    <string name="acerca_de">About</string>
+    <string name="datos_pelicula">Movie details</string>
+    <string name="ver_pelicula_relacionada">View related movie</string>
+    <string name="editar_pelicula">Edit movie</string>
+    <string name="volver_principal">Back to main</string>
+    <string name="editando_pelicula">Editing movie</string>
+    <string name="guardar">Save</string>
+    <string name="cancelar">Cancel</string>
 </resources>

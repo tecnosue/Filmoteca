@@ -20,7 +20,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.campusdigitalfp.filmoteca.navigation.Navigation
 import com.campusdigitalfp.filmoteca.screens.AboutScreen
+import com.campusdigitalfp.filmoteca.screens.FilmListScreen
 import com.campusdigitalfp.filmoteca.ui.theme.FilmotecaTheme
 
 
@@ -30,12 +32,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             FilmotecaTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    AboutScreen(
-
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+               // Scaffold(modifier = Modifier.fillMaxSize()) {}
+                Navigation()
             }
         }
     }
