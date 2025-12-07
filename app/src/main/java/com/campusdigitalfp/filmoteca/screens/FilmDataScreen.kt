@@ -1,13 +1,16 @@
 package com.campusdigitalfp.filmoteca.screens
 
+import android.R.color
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -17,11 +20,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.campusdigitalfp.filmoteca.R
 import com.campusdigitalfp.filmoteca.common.BarraSuperiorComun
+import com.campusdigitalfp.filmoteca.common.abrirPaginaWeb
+
 
 @Composable
 fun FilmDataScreen(navController: NavHostController, filmName: String,     modifier: Modifier = Modifier
@@ -42,21 +50,82 @@ fun FilmDataScreen(navController: NavHostController, filmName: String,     modif
             ?.get<String>("result")
 
         Column(
-            modifier = modifier.fillMaxSize(),
+            modifier = modifier
+                .fillMaxSize()
+                // Añado un padding de 16.dp a la izquierda y derecha
+                .padding(horizontal = 24.dp)
+                // Y aplico el padding del Scaffold al contenido
+                .padding(innerPadding),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            //verticalArrangement = Arrangement.Center,
 
         ) {
 
-            Text(
-                stringResource(R.string.datos_pelicula),
-                style = MaterialTheme.typography.titleMedium
-            )
-            //muestro el nombre de la película
-            Text(
-                text = filmName,
-                style = MaterialTheme.typography.titleLarge
-            )
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 16.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+
+                Image(
+                    painter = painterResource(id = R.drawable.harry_potter_piedra),
+                    contentDescription = "cartel de pelicula",
+                    modifier = Modifier
+                        .height(150.dp) //altura fija a la imagen
+                        .padding(end = 16.dp), // Espacio después de la imagen
+                    // para que la imagen se recorte y ajuste correctamente
+                    contentScale = androidx.compose.ui.layout.ContentScale.Fit
+                )
+
+                Column(
+                    Modifier.weight(1f),
+                    horizontalAlignment =Alignment.Start
+                ) {
+//                    Text(
+//                        stringResource(R.string.datos_pelicula),
+//                        style = MaterialTheme.typography.titleMedium
+//                    )
+                    //muestro el nombre de la película
+                    Text(
+                        //text = filmName,
+                        text = stringResource(R.string.harry_potter_titulo),
+                        style = MaterialTheme.typography.titleLarge,
+                        color= MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold
+                    )
+
+                    Spacer(modifier = Modifier.height(4.dp))
+
+                    Text(
+                        text = "Director",
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Bold
+
+                    )
+                    Text(
+                        text = "Chris Columbus",
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+
+                    Text(
+                        text = "Año:",
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Bold
+
+                    )
+                    Text(
+                        text = "2001",
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+
+                    Text(
+                        text = "BluRay, Sci-Fi",
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+
+                }
+            }
             Spacer(modifier = Modifier.height(10.dp))
 
             if (result != null) {
@@ -76,34 +145,57 @@ fun FilmDataScreen(navController: NavHostController, filmName: String,     modif
 
             Button(
                 onClick = {
-                    // voy  a la misma pantalla pero con otra película
-                    if (filmName == "Película A") {
-                        navController.navigate("filmData/Película B")
-                    } else {
-                        navController.navigate("filmData/Película A")
-                    }
+                    abrirPaginaWeb("https://www.imdb.com/es-es/title/tt0241527/?ref_=mv_close", context)
+
                 }
             ) {
-                Text(stringResource(R.string.ver_pelicula_relacionada))
+
+                Text(
+                    stringResource(R.string.ver_imdb),
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center
+
+                )
             }
 
-            Button(
-                onClick = {
-                    navController.navigate("filmEdit/$filmName")
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                text = stringResource(R.string.version_extendida),
+                //para alinearlo a la izquierda
+                modifier = Modifier.align(Alignment.Start)
+
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Absolute.SpaceBetween
+            ) {
+                Button(
+                    onClick = {
+                        navController.navigate("filmEdit/$filmName")
+                    },
+                    //el primer boton coge la mitad del espacio
+                    modifier = Modifier.weight(1f)
+
+                ) {
+                    Text(stringResource(R.string.editar_pelicula))
+                }
+                Button(
+                    onClick = {
+                        navController.navigate("filmList") {
+                            popUpTo("filmList") { inclusive = true }
+                        }
+                    },
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Text(stringResource(R.string.volver))
                 }
 
-            ) {
-                Text(stringResource(R.string.editar_pelicula))
             }
-            Button(
-                onClick = {
-                    navController.navigate("filmList") {
-                        popUpTo("filmList") { inclusive = true }
-                    }
-                }
-            ) {
-                Text(stringResource(R.string.volver_principal))
-            }
+
+
         }
     }
 }
+

@@ -26,6 +26,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.campusdigitalfp.filmoteca.R
 import com.campusdigitalfp.filmoteca.common.BarraSuperiorComun
+import com.campusdigitalfp.filmoteca.common.abrirPaginaWeb
 
 @Composable
 fun AboutScreen(navController: NavHostController, modifier: Modifier = Modifier) {
@@ -103,12 +104,7 @@ fun showToast(context: Context, message: String) {
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }
 
-fun abrirPaginaWeb(url: String, context: Context) {
-    val intent = Intent(Intent.ACTION_VIEW).apply {
-        data = Uri.parse(url) // Establece la URL que quieres abrir
-    }
-    context.startActivity(intent) // Inicia la actividad
-}
+
 
 fun mandarEmail(context: Context, email: String, asunto: String) {
     val intent = Intent(Intent.ACTION_SENDTO).apply {

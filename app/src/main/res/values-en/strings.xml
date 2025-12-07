@@ -12,12 +12,14 @@
     <string name="ver_pelicula_B">Watch movie B</string>
     <string name="acerca_de">About</string>
     <string name="datos_pelicula">Movie details</string>
-    <string name="ver_pelicula_relacionada">View related movie</string>
-    <string name="editar_pelicula">Edit movie</string>
+    <string name="ver_imdb">Watch  on IMDB</string>
+    <string name="editar_pelicula">Edit</string>
     <string name="volver_principal">Back to main</string>
     <string name="editando_pelicula">Editing movie</string>
     <string name="guardar">Save</string>
     <string name="cancelar">Cancel</string>
     <string name="edicion_cancelada">Canceled Edition</string>
     <string name="edicion_ok">Saved Successfully</string>
+    <string name="version_extendida">Extended Version</string>
+    <string name="harry_potter_titulo">Harry Potter and the Sorcerer\'s Stone</string>
 </resources>

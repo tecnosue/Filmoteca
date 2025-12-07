@@ -1,6 +1,9 @@
 package com.campusdigitalfp.filmoteca.common
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -43,4 +46,11 @@ fun BarraSuperiorComun(
             }
         }
     )
+}
+
+fun abrirPaginaWeb(url: String, context: Context) {
+    val intent = Intent(Intent.ACTION_VIEW).apply {
+        data = Uri.parse(url) // Establece la URL que quieres abrir
+    }
+    context.startActivity(intent) // Inicia la actividad
 }
