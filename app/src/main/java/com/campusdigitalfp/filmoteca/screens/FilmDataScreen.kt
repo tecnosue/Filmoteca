@@ -31,6 +31,7 @@ import com.campusdigitalfp.filmoteca.common.BarraSuperiorComun
 import com.campusdigitalfp.filmoteca.common.abrirPaginaWeb
 
 
+
 @Composable
 fun FilmDataScreen(navController: NavHostController, filmName: String,     modifier: Modifier = Modifier
 ) {

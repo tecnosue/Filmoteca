@@ -44,7 +44,7 @@ fun FilmListScreen( navController: NavHostController,     modifier: Modifier = M
             verticalArrangement = Arrangement.Center
         ) {
             val context = LocalContext.current
-            val mensajeToast = stringResource(R.string.funcionalidad_sin_implementar)
+            //val mensajeToast = stringResource(R.string.funcionalidad_sin_implementar)
             Column(
                 modifier = modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,

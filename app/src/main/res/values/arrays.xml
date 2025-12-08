@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="genero_list">
+        <item>Acción</item>
+        <item>Comedia</item>
+        <item>Drama</item>
+        <item>Terror</item>
+        <item>Ciencia Ficción</item>
+    </string-array>
+    <string-array name="formato_list">
+        <item>DVD</item>
+        <item>Blu-ray</item>
+        <item>Digital</item>
+        <item>Streaming</item>
+    </string-array>
+</resources>
