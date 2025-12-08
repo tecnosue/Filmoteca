@@ -22,5 +22,13 @@
     <string name="edicion_ok">Guardado Correctamente</string>
     <string name="version_extendida">Versión Extendida</string>
     <string name="harry_potter_titulo">Harry Potter y la piedra filosofal</string>
-
+    <string name="capturar_foto">Tomar una fotografía</string>
+    <string name="seleccionar_imagen">Seleccionar una imagen</string>
+    <string name="titulo_pelicula">Título</string>
+    <string name="director">Director</string>
+    <string name="anio">Año</string>
+    <string name="enlace_imdb">Enlace a IMDB</string>
+    <string name="comentarios">Comentarios</string>
+    <string name="genero">Genero</string>
+    <string name="formato">Formato</string>
 </resources>

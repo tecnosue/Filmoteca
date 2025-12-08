@@ -22,4 +22,13 @@
     <string name="edicion_ok">Saved Successfully</string>
     <string name="version_extendida">Extended Version</string>
     <string name="harry_potter_titulo">Harry Potter and the Sorcerer\'s Stone</string>
+    <string name="capturar_foto">Take a photo</string>
+    <string name="seleccionar_imagen">Select an image</string>
+    <string name="titulo_pelicula">Title</string>
+    <string name="director">Director</string>
+    <string name="anio">Year</string>
+    <string name="enlace_imdb">IMDB Link</string>
+    <string name="comentarios">Comments</string>
+    <string name="genero">Genre</string>
+    <string name="formato">Format</string>
 </resources>
