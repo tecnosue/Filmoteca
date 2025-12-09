@@ -1,13 +1,17 @@
 package com.campusdigitalfp.filmoteca.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -23,6 +27,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.campusdigitalfp.filmoteca.R
 import com.campusdigitalfp.filmoteca.common.BarraSuperiorComun
+import com.campusdigitalfp.filmoteca.sampledata.FilmDataSource
 
 @Composable
 fun FilmListScreen( navController: NavHostController,     modifier: Modifier = Modifier
@@ -36,44 +41,34 @@ fun FilmListScreen( navController: NavHostController,     modifier: Modifier = M
             )
         }
     ) { innerPadding ->
-        Column(
-            modifier = modifier
-                .fillMaxSize()
-                .padding(innerPadding),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            val context = LocalContext.current
-            //val mensajeToast = stringResource(R.string.funcionalidad_sin_implementar)
-            Column(
-                modifier = modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+//        Column(
+//            modifier = modifier
+//                .fillMaxSize()
+//                .padding(innerPadding),
+//            horizontalAlignment = Alignment.CenterHorizontally,
+//            verticalArrangement = Arrangement.Center
+//        ) {
+            //val context = LocalContext.current
 
+            LazyColumn(
+                modifier = modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+                    .padding(horizontal = 16.dp)
             ) {
-                Button(
-                    onClick = {
-                        navController.navigate("filmData/Película A")
-                    }
-                ) {
-                    Text(stringResource(R.string.ver_pelicula_A))
-                }
-
-                Button(
-                    onClick = {
-                        navController.navigate("filmData/Película B")
-                    }
-                ) {
-                    Text(stringResource(R.string.ver_pelicula_B))
-                }
-                Button(
-                    onClick = {
-                        navController.navigate("about")
-                    }
-                ) {
-                    Text(stringResource(R.string.acerca_de))
+                items(FilmDataSource.films) { film ->
+                    Text(
+                        text = film.title ?: "<Sin título>",
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable {
+                                navController.navigate("filmData/${film.id}")
+                            }
+                            .padding(vertical = 16.dp)
+                    )
                 }
             }
-        }
+       // }
     }
 }
+

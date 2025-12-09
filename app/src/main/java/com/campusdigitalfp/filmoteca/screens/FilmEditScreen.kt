@@ -37,15 +37,27 @@ import com.campusdigitalfp.filmoteca.R
 
 
 import com.campusdigitalfp.filmoteca.common.BarraSuperiorComun
+import com.campusdigitalfp.filmoteca.sampledata.FilmDataSource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FilmEditScreen(navController: NavHostController, filmName: String, modifier: Modifier = Modifier) {
-    var titulo by remember { mutableStateOf(filmName) }
-    var director by remember { mutableStateOf("") }
-    var anyo by remember { mutableStateOf("") }
-    var url by remember { mutableStateOf("") }
-    var comentarios by remember { mutableStateOf("") }
+fun FilmEditScreen(navController: NavHostController, filmId: Int, modifier: Modifier = Modifier) {
+    val film = FilmDataSource.films.getOrNull(filmId)
+
+    // Verificar que film no sea null
+    if (film == null) {
+        Text("Película no encontrada")
+        return
+    }
+
+    var titulo by remember { mutableStateOf(film.title ?: "") }
+    var director by remember { mutableStateOf(film.director ?: "") }
+    var anyo by remember { mutableStateOf(film.year.toString()) }  // Convertir Int a String
+    var url by remember { mutableStateOf(film.imdbUrl ?: "") }
+    var comentarios by remember { mutableStateOf(film.comments ?: "") }
+    var genero by remember { mutableIntStateOf(film.genre) }
+    var formato by remember { mutableIntStateOf(film.format) }
+    var imageResId by remember { mutableIntStateOf(film.imageResId) }
 
     var expandedGenero by remember { mutableStateOf(false) }
     var expandedFormato by remember { mutableStateOf(false) }
@@ -54,8 +66,7 @@ fun FilmEditScreen(navController: NavHostController, filmName: String, modifier:
     val generoList = context.resources.getStringArray(R.array.genero_list).toList()
     val formatoList = context.resources.getStringArray(R.array.formato_list).toList()
 
-    var genero by remember { mutableIntStateOf(0) }
-    var formato by remember { mutableIntStateOf(1) }
+
 
     Scaffold(
         topBar = {
@@ -84,17 +95,25 @@ fun FilmEditScreen(navController: NavHostController, filmName: String, modifier:
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.harry_potter_piedra),
+                    painter = painterResource(film.imageResId),
                     contentDescription = "cartel de pelicula",
                     modifier = Modifier
                         .height(100.dp)
                         .padding(end = 16.dp),
                     contentScale = androidx.compose.ui.layout.ContentScale.Fit
                 )
-                Button(onClick = { }) {
+                Button(
+                    onClick = { },
+                    modifier = Modifier.weight(1f)
+
+                ) {
                     Text(stringResource(R.string.capturar_foto))
                 }
-                Button(onClick = { }) {
+                Button(
+                    onClick = { },
+                    modifier = Modifier.weight(1f)
+
+                ) {
                     Text(stringResource(R.string.seleccionar_imagen))
                 }
             }

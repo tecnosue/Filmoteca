@@ -29,11 +29,11 @@ import androidx.navigation.NavHostController
 import com.campusdigitalfp.filmoteca.R
 import com.campusdigitalfp.filmoteca.common.BarraSuperiorComun
 import com.campusdigitalfp.filmoteca.common.abrirPaginaWeb
-
+import com.campusdigitalfp.filmoteca.sampledata.FilmDataSource
 
 
 @Composable
-fun FilmDataScreen(navController: NavHostController, filmName: String,     modifier: Modifier = Modifier
+fun FilmDataScreen(navController: NavHostController, filmId: Int,     modifier: Modifier = Modifier
 ) {
     Scaffold(
         topBar = {
@@ -45,6 +45,15 @@ fun FilmDataScreen(navController: NavHostController, filmName: String,     modif
         }
     ) { innerPadding ->
         val context = LocalContext.current
+        val film = FilmDataSource.films.getOrNull(filmId)
+
+        if (film == null) {
+            Text(
+                text = "Película no encontrada",
+                modifier = Modifier.padding(innerPadding)
+            )
+            return@Scaffold
+        }
         //recibo el resultado
         val result = navController.currentBackStackEntry
             ?.savedStateHandle
@@ -70,7 +79,7 @@ fun FilmDataScreen(navController: NavHostController, filmName: String,     modif
             ) {
 
                 Image(
-                    painter = painterResource(id = R.drawable.harry_potter_piedra),
+                    painter = painterResource(film.imageResId),
                     contentDescription = "cartel de pelicula",
                     modifier = Modifier
                         .height(150.dp) //altura fija a la imagen
@@ -90,7 +99,7 @@ fun FilmDataScreen(navController: NavHostController, filmName: String,     modif
                     //muestro el nombre de la película
                     Text(
                         //text = filmName,
-                        text = stringResource(R.string.harry_potter_titulo),
+                        text = film.title ?: "<Sin título>",
                         style = MaterialTheme.typography.titleLarge,
                         color= MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.Bold
@@ -105,7 +114,7 @@ fun FilmDataScreen(navController: NavHostController, filmName: String,     modif
 
                     )
                     Text(
-                        text = "Chris Columbus",
+                        text = film.director?: " ",
                         style = MaterialTheme.typography.bodyMedium
                     )
 
@@ -116,7 +125,7 @@ fun FilmDataScreen(navController: NavHostController, filmName: String,     modif
 
                     )
                     Text(
-                        text = "2001",
+                        text = film.year.toString(),
                         style = MaterialTheme.typography.bodyMedium
                     )
 
@@ -174,7 +183,7 @@ fun FilmDataScreen(navController: NavHostController, filmName: String,     modif
             ) {
                 Button(
                     onClick = {
-                        navController.navigate("filmEdit/$filmName")
+                        navController.navigate("filmEdit/${film.id}")
                     },
                     //el primer boton coge la mitad del espacio
                     modifier = Modifier.weight(1f)

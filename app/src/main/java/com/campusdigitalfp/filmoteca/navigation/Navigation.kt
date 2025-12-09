@@ -14,17 +14,18 @@ fun Navigation(){
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = "filmList") {
-        composable ("filmList"){ FilmListScreen(navController) }
-        composable ("about"){ AboutScreen(navController) }
-        composable("filmData/{filmName}") { backStackEntry ->
-            val filmName = backStackEntry.arguments?.getString("filmName") ?: ""
-            FilmDataScreen(navController, filmName)
+        composable("filmList") { FilmListScreen(navController) }
+        composable("about") { AboutScreen(navController) }
+        composable("filmData/{filmId}") { backStackEntry ->
+            val filmId = backStackEntry.arguments?.getString("filmId")?.toIntOrNull() ?: 0
+            FilmDataScreen(navController = navController, filmId = filmId)
         }
-        composable ("filmEdit/{filmName}"){ backStackEntry ->
-            val filmName = backStackEntry.arguments?.getString("filmName") ?: ""
-            FilmEditScreen(navController, filmName ) }
+        composable("filmEdit/{filmId}") { backStackEntry ->
+            val filmId = backStackEntry.arguments?.getString("filmId")?.toIntOrNull() ?: 0
+            FilmEditScreen(navController = navController, filmId = filmId)
 
 
+        }
     }
 
 }
