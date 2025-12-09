@@ -235,6 +235,17 @@ fun FilmEditScreen(navController: NavHostController, filmId: Int, modifier: Modi
             ) {
                 Button(
                     onClick = {
+                        // Guardar los cambios en FilmDataSource
+                        film.title = titulo
+                        film.director = director
+                        film.year = anyo.toIntOrNull() ?: 0  // Convertir String a Int
+                        film.imdbUrl = url
+                        film.imageResId = imageResId
+                        film.comments = comentarios
+                        film.genre = genero
+                        film.format = formato
+
+                        // Devolver resultado y volver
                         navController.previousBackStackEntry?.savedStateHandle?.set("result", "RESULT_OK")
                         navController.popBackStack()
                     },

@@ -65,6 +65,9 @@ fun FilmListScreen( navController: NavHostController,     modifier: Modifier = M
                             modifier = Modifier
                                 .height(100.dp)
                                 .padding(end = 16.dp)
+                                .clickable {
+                                    navController.navigate("filmData/${film.id}")
+                                }
                                 .weight(1f),
                             contentScale = androidx.compose.ui.layout.ContentScale.Fit
                         )
