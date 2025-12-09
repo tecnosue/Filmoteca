@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -41,34 +42,71 @@ fun FilmListScreen( navController: NavHostController,     modifier: Modifier = M
             )
         }
     ) { innerPadding ->
-//        Column(
-//            modifier = modifier
-//                .fillMaxSize()
-//                .padding(innerPadding),
-//            horizontalAlignment = Alignment.CenterHorizontally,
-//            verticalArrangement = Arrangement.Center
-//        ) {
-            //val context = LocalContext.current
-
+        Column(
+            modifier = modifier
+                .fillMaxSize()
+                .padding(innerPadding),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             LazyColumn(
                 modifier = modifier
                     .fillMaxSize()
-                    .padding(innerPadding)
+                    .weight(1f)
                     .padding(horizontal = 16.dp)
             ) {
                 items(FilmDataSource.films) { film ->
-                    Text(
-                        text = film.title ?: "<Sin título>",
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable {
-                                navController.navigate("filmData/${film.id}")
-                            }
-                            .padding(vertical = 16.dp)
-                    )
+                    Row(  modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 12.dp),
+                        verticalAlignment = Alignment.CenterVertically) {
+                        Image(
+                            painter = painterResource(film.imageResId),
+                            contentDescription = "cartel de pelicula",
+                            modifier = Modifier
+                                .height(100.dp)
+                                .padding(end = 16.dp)
+                                .weight(1f),
+                            contentScale = androidx.compose.ui.layout.ContentScale.Fit
+                        )
+                        Column(
+                            modifier= Modifier.weight(2f)
+                        ) {
+                            Text(
+                                text = film.title ?: "<Sin título>",
+                                style = MaterialTheme.typography.titleLarge,
+                                color= MaterialTheme.colorScheme.primary,
+                                fontWeight = FontWeight.Bold,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clickable {
+                                        navController.navigate("filmData/${film.id}")
+                                    }
+
+                            )
+                            Text(
+                                text = film.director ?: "",
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clickable {
+                                        navController.navigate("filmData/${film.id}")
+                                    }
+                            )
+                        }
+
+                    }
+
                 }
             }
-       // }
+            Button(
+                onClick = {
+                    navController.navigate("about")
+                }
+            ) {
+                Text(stringResource(R.string.acerca_de))
+            }
+
+
+        }
     }
 }
 
