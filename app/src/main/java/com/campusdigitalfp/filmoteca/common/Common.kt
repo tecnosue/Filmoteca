@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.DropdownMenu
@@ -21,7 +22,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -43,6 +46,9 @@ fun BarraSuperiorComun(
     title: String = "Filmoteca",
     mostrarAtras : Boolean = true,
     mostrarMenu: Boolean = false,
+    isActionMode: MutableState<Boolean>? = null, // Usamos nullable ya que solo se usa en FilmListScreen
+    selectedFilms: MutableList<Film>? = null,
+
     onAtrasClick: () -> Unit = { navController.popBackStack() }
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -89,13 +95,28 @@ fun BarraSuperiorComun(
 //        }
         //menú en FilmListScreen
         actions = {
-        if (mostrarMenu ){
+            if(isActionMode?.value== true && selectedFilms != null) {
+                IconButton(onClick = {
+                    FilmDataSource.films.removeAll(selectedFilms)
+                    selectedFilms.clear()
+                    isActionMode.value = false
 
-            IconButton(onClick = { expanded = true }) {
-                Icon(
-                    imageVector = Icons.Filled.MoreVert,
-                    contentDescription = "menu de opciones",
-                    tint = MaterialTheme.colorScheme.primary
+                }) {
+                    Icon(
+                        imageVector = Icons.Filled.Delete,
+                        contentDescription = "Borrar seleccionados"
+                    )
+                }
+
+
+            }
+            if (mostrarMenu ){
+
+                IconButton(onClick = { expanded = true }) {
+                    Icon(
+                        imageVector = Icons.Filled.MoreVert,
+                        contentDescription = "menu de opciones",
+                        tint = MaterialTheme.colorScheme.primary
                 )
             }
             DropdownMenu(
