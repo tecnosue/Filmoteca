@@ -38,7 +38,8 @@ fun FilmListScreen( navController: NavHostController,     modifier: Modifier = M
             BarraSuperiorComun(
                 navController = navController,
                 title = "Filmoteca",
-                mostrarAtras = false
+                mostrarAtras = false,
+                mostrarMenu = true
             )
         }
     ) { innerPadding ->

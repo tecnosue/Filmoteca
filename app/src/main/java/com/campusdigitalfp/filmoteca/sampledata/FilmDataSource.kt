@@ -1,10 +1,11 @@
 package com.campusdigitalfp.filmoteca.sampledata
+import androidx.compose.runtime.mutableStateListOf
 
 import com.campusdigitalfp.filmoteca.R
 
 object FilmDataSource {
-    val films: MutableList<Film> = mutableListOf()
-
+    //val films: MutableList<Film> = mutableListOf()
+    val films = mutableStateListOf<Film>() //la UI se actualiza automáticamente cuando añades películas
     init {
         val f1 = Film(
             id = 0,
