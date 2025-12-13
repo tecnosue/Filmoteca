@@ -34,10 +34,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.campusdigitalfp.filmoteca.R
-
+import android.util.Log
 
 import com.campusdigitalfp.filmoteca.common.BarraSuperiorComun
 import com.campusdigitalfp.filmoteca.sampledata.FilmDataSource
+
+private const val TAG = "FilmEditScreen"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -74,6 +76,8 @@ fun FilmEditScreen(navController: NavHostController, filmId: Int, modifier: Modi
                 navController = navController,
                 title = "Filmoteca",
                 onAtrasClick = {
+                    Log.i(TAG, "Edición cancelada (atrás) para la película: ${film.title}")
+
                     navController.previousBackStackEntry?.savedStateHandle?.set("result", "RESULT_CANCELED")
                     navController.popBackStack()
                 }
@@ -245,6 +249,9 @@ fun FilmEditScreen(navController: NavHostController, filmId: Int, modifier: Modi
                         film.genre = genero
                         film.format = formato
 
+                        // Log informativo de guardado
+                        Log.i(TAG, "Cambios guardados para la película: $titulo")
+
                         // Devolver resultado y volver
                         navController.previousBackStackEntry?.savedStateHandle?.set("result", "RESULT_OK")
                         navController.popBackStack()
@@ -256,6 +263,8 @@ fun FilmEditScreen(navController: NavHostController, filmId: Int, modifier: Modi
 
                 Button(
                     onClick = {
+                        // Log informativo de cancelación
+                        Log.i(TAG, "Edición cancelada para la película: ${film.title}")
                         navController.previousBackStackEntry?.savedStateHandle?.set("result", "RESULT_CANCELED")
                         navController.popBackStack()
                     },
